@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6jedjmapq2bq"]
+
+[ext_resource type="Script" path="res://WorldMap/WorldObjects/WO_Generic/WO_WorldObject.gd" id="1_0iiex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6oj7l"]
+
+[node name="WorldObject" type="Area2D"]
+script = ExtResource("1_0iiex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6oj7l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

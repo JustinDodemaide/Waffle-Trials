@@ -1,0 +1,160 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8jla14n0sx0w"]
+
+[ext_resource type="Script" path="res://World/World.gd" id="1_pkscg"]
+[ext_resource type="Script" path="res://World/PauseHandler.gd" id="2_bg0i6"]
+[ext_resource type="Script" path="res://World/SceneHandler.gd" id="2_mtdip"]
+[ext_resource type="PackedScene" uid="uid://c4b4ddm8v5akl" path="res://World/WorldObjects/Test/WO_Test.tscn" id="3_le0s6"]
+[ext_resource type="TileSet" uid="uid://d05ml3ei7hm55" path="res://World/World.tres" id="4_56mkc"]
+[ext_resource type="PackedScene" uid="uid://d0vawvl3qvy2l" path="res://LoadingScreen/LoadingScreen.tscn" id="4_g8r0o"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="4_lav6s"]
+[ext_resource type="FontFile" uid="uid://8g4u74xs6nhd" path="res://battlenet.ttf" id="5_eoxjk"]
+[ext_resource type="AudioStream" uid="uid://djxasi418gb6y" path="res://sounds/Night on the Town - TrackTribe.mp3" id="9_muks4"]
+[ext_resource type="Texture2D" uid="uid://chua7mqrrbww4" path="res://volume_up_FILL0_wght400_GRAD0_opsz24.png" id="10_dce64"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_pkscg")
+
+[node name="PauseHandler" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_bg0i6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PauseHandler"]
+
+[node name="Paused" type="Label" parent="PauseHandler/CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -29.5
+offset_right = 24.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 64
+text = "Paused"
+
+[node name="GameOver" type="Label" parent="PauseHandler/CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -186.0
+offset_top = -191.0
+offset_right = 186.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 96
+text = "Game Over!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseHandler/CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -42.0
+offset_right = 20.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Score" type="Label" parent="PauseHandler/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="BestScore" type="Label" parent="PauseHandler/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="NewBest" type="Label" parent="PauseHandler/CanvasLayer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 64
+text = "New Best Score!"
+horizontal_alignment = 1
+
+[node name="PlayAgain" type="Button" parent="PauseHandler/CanvasLayer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 36
+text = "Play Again"
+
+[node name="EndGame" type="Button" parent="PauseHandler/CanvasLayer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_eoxjk")
+theme_override_font_sizes/font_size = 36
+text = "Exit"
+
+[node name="Sound" parent="PauseHandler" instance=ExtResource("4_lav6s")]
+
+[node name="SceneHandler" type="Node" parent="."]
+script = ExtResource("2_mtdip")
+
+[node name="LoadingScreen" parent="SceneHandler" instance=ExtResource("4_g8r0o")]
+visible = false
+
+[node name="TileMap" type="TileMap" parent="."]
+visible = false
+z_index = -1
+tile_set = ExtResource("4_56mkc")
+format = 2
+layer_0/name = "ground"
+layer_0/tile_data = PackedInt32Array(0, 131073, 0, 1, 131073, 0, 2, 131073, 0, 3, 131073, 0, 4, 131073, 0, 5, 131073, 0, 6, 131073, 0, 7, 131073, 0, 8, 131073, 0, 9, 131073, 0, 10, 131073, 0, 11, 131073, 0, 12, 131073, 0, 13, 131073, 0, 14, 131073, 0, 15, 131073, 0, 16, 131073, 0, 17, 131073, 0, 18, 131073, 0, 19, 131073, 0, 20, 131073, 0, 21, 131073, 0, 22, 131073, 0, 23, 131073, 0, 24, 131073, 0, 25, 131073, 0, 26, 131073, 0, 27, 131073, 0, 28, 131073, 0, 29, 131073, 0, 30, 131073, 0, 31, 131073, 0, 65567, 131073, 0, 131103, 131073, 0, 196639, 131073, 0, 262175, 131073, 0, 327711, 131073, 0, 393247, 131073, 0, 458783, 131073, 0, 524319, 131073, 0, 589855, 131073, 0, 655391, 131073, 0, 720927, 131073, 0, 786463, 131073, 0, 851999, 131073, 0, 917535, 131073, 0, 983071, 131073, 0, 983070, 131073, 0, 983069, 131073, 0, 983068, 131073, 0, 983067, 131073, 0, 983066, 131073, 0, 983065, 131073, 0, 983064, 131073, 0, 983063, 131073, 0, 983062, 131073, 0, 983061, 131073, 0, 983060, 131073, 0, 983059, 131073, 0, 983058, 131073, 0, 983057, 131073, 0, 983056, 131073, 0, 983055, 131073, 0, 983054, 131073, 0, 983053, 131073, 0, 983052, 131073, 0, 983051, 131073, 0, 983050, 131073, 0, 983049, 131073, 0, 983048, 131073, 0, 917512, 1, 0, 917511, 1, 0, 983047, 131073, 0, 983046, 131073, 0, 983045, 131073, 0, 983044, 131073, 0, 983043, 131073, 0, 983042, 131073, 0, 983041, 131073, 0, 983040, 131073, 0, 65536, 131073, 0, 131072, 131073, 0, 196608, 131073, 0, 262144, 131073, 0, 327680, 131073, 0, 393216, 131073, 0, 458752, 131073, 0, 524288, 131073, 0, 589824, 131073, 0, 655360, 131073, 0, 720896, 131073, 0, 786432, 131073, 0, 851968, 131073, 0, 917504, 131073, 0, 458766, 131073, 0, 393230, 1, 0, 327694, 131073, 0, 262158, 131073, 0, 196622, 131073, 0, 131086, 131073, 0, 65550, 131073, 0, 65549, 131073, 0, 65548, 131073, 0, 65547, 131073, 0, 65546, 131073, 0, 65545, 131073, 0, 65544, 131073, 0, 65543, 1, 0, 65542, 1, 0, 65541, 1, 0, 65540, 1, 0, 65539, 1, 0, 65538, 1, 0, 65537, 131073, 0, 131073, 131073, 0, 196609, 131073, 0, 262145, 131073, 0, 327681, 131073, 0, 393217, 131073, 0, 458753, 131073, 0, 524289, 131073, 0, 589825, 131073, 0, 655361, 131073, 0, 720897, 131073, 0, 786433, 131073, 0, 851969, 131073, 0, 917505, 131073, 0, 917506, 131073, 0, 851970, 1, 0, 786434, 1, 0, 720898, 1, 0, 655362, 131073, 0, 589826, 1, 0, 524290, 1, 0, 458754, 1, 0, 393218, 1, 0, 327682, 131073, 0, 262146, 131073, 0, 196610, 131073, 0, 131074, 131073, 0, 131075, 131073, 0, 196611, 131073, 0, 262147, 1, 0, 327683, 1, 0, 393219, 131073, 0, 458755, 131073, 0, 524291, 131073, 0, 589827, 1, 0, 655363, 131073, 0, 720899, 1, 0, 786435, 131073, 0, 851971, 1, 0, 917507, 1, 0, 917508, 1, 0, 851972, 131073, 0, 786436, 1, 0, 720900, 1, 0, 655364, 131073, 0, 589828, 1, 0, 524292, 131073, 0, 458756, 131073, 0, 393220, 131073, 0, 327684, 131073, 0, 262148, 1, 0, 196612, 1, 0, 131076, 131073, 0, 131077, 131073, 0, 196613, 1, 0, 262149, 1, 0, 327685, 131073, 0, 393221, 131073, 0, 458757, 131073, 0, 524293, 131073, 0, 589829, 1, 0, 655365, 131073, 0, 720901, 131073, 0, 786437, 1, 0, 851973, 131073, 0, 917509, 1, 0, 917510, 1, 0, 851974, 131073, 0, 786438, 1, 0, 720902, 131073, 0, 655366, 131073, 0, 589830, 1, 0, 524294, 131073, 0, 458758, 131073, 0, 393222, 131073, 0, 327686, 131073, 0, 262150, 1, 0, 196614, 131073, 0, 131078, 131073, 0, 131079, 131073, 0, 196615, 131073, 0, 262151, 1, 0, 327687, 131073, 0, 393223, 131073, 0, 458759, 131073, 0, 524295, 131073, 0, 589831, 1, 0, 655367, 131073, 0, 720903, 131073, 0, 786439, 1, 0, 851975, 131073, 0, 851976, 131073, 0, 786440, 1, 0, 720904, 1, 0, 655368, 1, 0, 589832, 1, 0, 524296, 131073, 0, 458760, 131073, 0, 393224, 131073, 0, 327688, 131073, 0, 262152, 1, 0, 196616, 131073, 0, 131080, 1, 0, 131081, 1, 0, 196617, 131073, 0, 262153, 1, 0, 327689, 131073, 0, 393225, 131073, 0, 458761, 131073, 0, 524297, 131073, 0, 589833, 131073, 0, 655369, 131073, 0, 720905, 131073, 0, 786441, 131073, 0, 851977, 131073, 0, 917513, 1, 0, 917514, 1, 0, 851978, 131073, 0, 786442, 131073, 0, 720906, 131073, 0, 655370, 131073, 0, 589834, 131073, 0, 524298, 131073, 0, 458762, 131073, 0, 393226, 131073, 0, 327690, 131073, 0, 262154, 1, 0, 196618, 131073, 0, 131082, 1, 0, 131083, 1, 0, 196619, 1, 0, 262155, 1, 0, 327691, 131073, 0, 393227, 131073, 0, 458763, 131073, 0, 524299, 131073, 0, 589835, 131073, 0, 655371, 131073, 0, 720907, 131073, 0, 786443, 131073, 0, 851979, 1, 0, 917515, 1, 0, 917516, 131073, 0, 851980, 1, 0, 786444, 1, 0, 720908, 1, 0, 655372, 1, 0, 589836, 1, 0, 524300, 1, 0, 458764, 1, 0, 393228, 131073, 0, 327692, 131073, 0, 262156, 1, 0, 196620, 1, 0, 131084, 131073, 0, 131085, 131073, 0, 196621, 131073, 0, 262157, 131073, 0, 327693, 131073, 0, 393229, 1, 0, 458765, 1, 0, 524301, 131073, 0, 589837, 131073, 0, 655373, 131073, 0, 720909, 131073, 0, 786445, 131073, 0, 851981, 131073, 0, 917517, 131073, 0, 917518, 131073, 0, 851982, 131073, 0, 786446, 131073, 0, 720910, 131073, 0, 655374, 131073, 0, 589838, 131073, 0, 524302, 131073, 0, 524303, 131073, 0, 458767, 131073, 0, 393231, 1, 0, 327695, 131073, 0, 262159, 131073, 0, 196623, 131073, 0, 131087, 131073, 0, 65551, 131073, 0, 65552, 131073, 0, 131088, 131073, 0, 196624, 131073, 0, 262160, 131073, 0, 327696, 131073, 0, 393232, 1, 0, 458768, 1, 0, 524304, 131073, 0, 589840, 131073, 0, 589839, 131073, 0, 655375, 131073, 0, 720911, 131073, 0, 786447, 131073, 0, 851983, 131073, 0, 917519, 131073, 0, 917520, 131073, 0, 851984, 131073, 0, 786448, 131073, 0, 720912, 131073, 0, 655376, 131073, 0, 655377, 131073, 0, 589841, 131073, 0, 524305, 1, 0, 458769, 1, 0, 393233, 131073, 0, 327697, 131073, 0, 262161, 131073, 0, 196625, 131073, 0, 131089, 131073, 0, 65553, 131073, 0, 65554, 131073, 0, 131090, 131073, 0, 196626, 131073, 0, 262162, 131073, 0, 327698, 131073, 0, 393234, 131073, 0, 458770, 131073, 0, 524306, 1, 0, 589842, 1, 0, 655378, 131073, 0, 720914, 131073, 0, 720913, 131073, 0, 786449, 131073, 0, 851985, 131073, 0, 917521, 131073, 0, 917522, 131073, 0, 851986, 131073, 0, 786450, 131073, 0, 786451, 131073, 0, 720915, 131073, 0, 655379, 1, 0, 589843, 1, 0, 524307, 131073, 0, 458771, 131073, 0, 393235, 131073, 0, 327699, 131073, 0, 262163, 131073, 0, 196627, 131073, 0, 131091, 131073, 0, 65555, 131073, 0, 65556, 131073, 0, 131092, 131073, 0, 196628, 131073, 0, 262164, 131073, 0, 327700, 131073, 0, 393236, 131073, 0, 458772, 131073, 0, 524308, 131073, 0, 589844, 131073, 0, 655380, 1, 0, 720916, 131073, 0, 786452, 131073, 0, 851988, 131073, 0, 851987, 131073, 0, 917523, 131073, 0, 917524, 131073, 0, 917525, 131073, 0, 851989, 131073, 0, 786453, 131073, 0, 720917, 131073, 0, 655381, 1, 0, 589845, 131073, 0, 524309, 131073, 0, 458773, 131073, 0, 393237, 131073, 0, 327701, 131073, 0, 262165, 131073, 0, 196629, 131073, 0, 131093, 131073, 0, 65557, 131073, 0, 65558, 131073, 0, 131094, 131073, 0, 196630, 131073, 0, 262166, 131073, 0, 327702, 131073, 0, 393238, 131073, 0, 458774, 131073, 0, 524310, 131073, 0, 589846, 1, 0, 655382, 1, 0, 720918, 131073, 0, 786454, 131073, 0, 851990, 131073, 0, 917526, 131073, 0, 917527, 131073, 0, 851991, 131073, 0, 786455, 131073, 0, 720919, 131073, 0, 655383, 131073, 0, 589847, 1, 0, 524311, 1, 0, 458775, 131073, 0, 393239, 131073, 0, 327703, 131073, 0, 262167, 131073, 0, 196631, 131073, 0, 131095, 131073, 0, 65559, 131073, 0, 65560, 131073, 0, 131096, 131073, 0, 196632, 131073, 0, 262168, 131073, 0, 327704, 131073, 0, 393240, 131073, 0, 458776, 1, 0, 524312, 1, 0, 589848, 131073, 0, 655384, 131073, 0, 720920, 131073, 0, 786456, 131073, 0, 851992, 131073, 0, 917528, 131073, 0, 917529, 131073, 0, 851993, 131073, 0, 786457, 131073, 0, 720921, 131073, 0, 655385, 131073, 0, 589849, 131073, 0, 524313, 131073, 0, 458777, 131073, 0, 393241, 1, 0, 327705, 1, 0, 262169, 131073, 0, 196633, 131073, 0, 131097, 131073, 0, 65561, 131073, 0, 65562, 131073, 0, 131098, 131073, 0, 196634, 131073, 0, 262170, 1, 0, 327706, 1, 0, 393242, 131073, 0, 458778, 131073, 0, 524314, 131073, 0, 589850, 131073, 0, 655386, 131073, 0, 720922, 131073, 0, 786458, 131073, 0, 851994, 131073, 0, 917530, 131073, 0, 917531, 131073, 0, 851995, 131073, 0, 786459, 131073, 0, 720923, 131073, 0, 655387, 131073, 0, 589851, 131073, 0, 524315, 131073, 0, 458779, 131073, 0, 393243, 131073, 0, 327707, 131073, 0, 262171, 131073, 0, 196635, 1, 0, 131099, 131073, 0, 65563, 131073, 0, 65564, 131073, 0, 131100, 131073, 0, 196636, 1, 0, 262172, 131073, 0, 327708, 131073, 0, 393244, 131073, 0, 458780, 131073, 0, 524316, 131073, 0, 589852, 131073, 0, 655388, 131073, 0, 720924, 131073, 0, 786460, 131073, 0, 851996, 131073, 0, 917532, 131073, 0, 917533, 131073, 0, 851997, 131073, 0, 786461, 131073, 0, 720925, 131073, 0, 655389, 131073, 0, 589853, 131073, 0, 524317, 131073, 0, 458781, 131073, 0, 393245, 131073, 0, 327709, 131073, 0, 262173, 131073, 0, 196637, 1, 0, 131101, 131073, 0, 65565, 131073, 0, 65566, 131073, 0, 131102, 131073, 0, 196638, 131073, 0, 262174, 131073, 0, 327710, 131073, 0, 393246, 131073, 0, 458782, 131073, 0, 524318, 131073, 0, 589854, 131073, 0, 655390, 131073, 0, 720926, 131073, 0, 786462, 131073, 0, 851998, 131073, 0, 917534, 131073, 0)
+
+[node name="WorldClock" type="Timer" parent="."]
+autostart = true
+
+[node name="WO_Test" parent="." instance=ExtResource("3_le0s6")]
+
+[node name="WO_Test2" parent="." instance=ExtResource("3_le0s6")]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Mute" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_bottom = 32.0
+grow_horizontal = 0
+tooltip_text = "Mute Music"
+focus_mode = 0
+toggle_mode = true
+icon = ExtResource("10_dce64")
+flat = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_muks4")
+autoplay = true
+
+[connection signal="pressed" from="PauseHandler/CanvasLayer/VBoxContainer/PlayAgain" to="PauseHandler" method="_on_play_again_pressed"]
+[connection signal="pressed" from="PauseHandler/CanvasLayer/VBoxContainer/EndGame" to="PauseHandler" method="_on_end_game_pressed"]
+[connection signal="timeout" from="WorldClock" to="." method="_on_world_clock_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Mute" to="." method="_on_mute_pressed"]
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

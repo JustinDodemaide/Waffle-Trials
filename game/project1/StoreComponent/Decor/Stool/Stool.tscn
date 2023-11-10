@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://baitem4l755ae"]
+
+[ext_resource type="Texture2D" uid="uid://dlhtibd2lv3xr" path="res://StoreComponent/Decor/Stool/stool.png" id="1_n63gh"]
+[ext_resource type="Script" path="res://StoreComponent/Decor/Stool/Stool.gd" id="1_oti3r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2578"]
+radius = 10.0499
+
+[node name="Stool" type="StaticBody2D"]
+script = ExtResource("1_oti3r")
+metadata/seat = Vector2(0, -10)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_n63gh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+rotation = -0.563741
+skew = -0.392699
+shape = SubResource("CircleShape2D_o2578")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+z_index = 10
+offset_right = 40.0
+offset_bottom = 23.0

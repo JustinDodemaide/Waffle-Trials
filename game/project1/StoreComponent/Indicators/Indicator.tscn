@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7volcu3g28ad"]
+
+[ext_resource type="Texture2D" uid="uid://wpnx686capx5" path="res://StoreComponent/Indicators/complete.png" id="1_0dai6"]
+[ext_resource type="Script" path="res://StoreComponent/Indicators/Indicator.gd" id="2_5h3mw"]
+[ext_resource type="Texture2D" uid="uid://x8p5d8dt035d" path="res://StoreComponent/Indicators/warning.png" id="2_dojq5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qpy1"]
+atlas = ExtResource("1_0dai6")
+region = Rect2(0, 0, 36, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gee0n"]
+atlas = ExtResource("2_dojq5")
+region = Rect2(0, 0, 44, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rpebj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qpy1")
+}],
+"loop": false,
+"name": &"green",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gee0n")
+}],
+"loop": true,
+"name": &"warning",
+"speed": 5.0
+}]
+
+[node name="Indicator" type="AnimatedSprite2D"]
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_rpebj")
+animation = &"warning"
+script = ExtResource("2_5h3mw")

@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqf34u2txdyhs"]
+
+[ext_resource type="Script" path="res://StoreComponent/Interactables/WaffleMaker/WaffleMaker.gd" id="1_xqvit"]
+[ext_resource type="Texture2D" uid="uid://ggth02wgqiix" path="res://StoreComponent/Interactables/WaffleMaker/wafflemaker_overcooked.png" id="2_11vbl"]
+[ext_resource type="Texture2D" uid="uid://b55wo23hgoa10" path="res://StoreComponent/Interactables/WaffleMaker/wafflemaker_cooked.png" id="2_ecmfs"]
+[ext_resource type="Texture2D" uid="uid://dl4uidsrytuup" path="res://StoreComponent/Interactables/WaffleMaker/wafflemaker_empty.png" id="2_tfrpn"]
+[ext_resource type="Texture2D" uid="uid://cxvr7naekt31x" path="res://StoreComponent/Interactables/WaffleMaker/wafflemaker_closed.png" id="3_jt0l8"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="6_cl6a4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmsxp"]
+atlas = ExtResource("2_11vbl")
+region = Rect2(0, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymaex"]
+atlas = ExtResource("2_ecmfs")
+region = Rect2(0, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rfdp"]
+atlas = ExtResource("2_tfrpn")
+region = Rect2(0, 0, 64, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0sv3"]
+atlas = ExtResource("3_jt0l8")
+region = Rect2(0, 0, 64, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5sci4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmsxp")
+}],
+"loop": true,
+"name": &"burnt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymaex")
+}],
+"loop": true,
+"name": &"done",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rfdp")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0sv3")
+}],
+"loop": false,
+"name": &"on",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pvw25"]
+size = Vector2(50, 55)
+
+[node name="WaffleMaker" type="Node2D"]
+script = ExtResource("1_xqvit")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_5sci4")
+animation = &"burnt"
+autoplay = "off"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 62.5)
+shape = SubResource("RectangleShape2D_pvw25")
+
+[node name="Sound" parent="." instance=ExtResource("6_cl6a4")]

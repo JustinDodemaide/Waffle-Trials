@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djxasi418gb6y"
+path="res://.godot/imported/Night on the Town - TrackTribe.mp3-51236bcfcc60268e9b079e16d75f46d9.mp3str"
+
+[deps]
+
+source_file="res://sounds/Night on the Town - TrackTribe.mp3"
+dest_files=["res://.godot/imported/Night on the Town - TrackTribe.mp3-51236bcfcc60268e9b079e16d75f46d9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

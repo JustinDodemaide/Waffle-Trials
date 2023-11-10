@@ -1,0 +1,16 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://d05ml3ei7hm55"]
+
+[ext_resource type="Texture2D" uid="uid://cvq8pi8r6yfno" path="res://World/floortile.png" id="1_57aay"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r6ct7"]
+texture = ExtResource("1_57aay")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/custom_data_0 = 1.0
+2:0/0 = 0
+2:0/0/custom_data_0 = 0.5
+
+[resource]
+custom_data_layer_0/name = "speed_modifier"
+custom_data_layer_0/type = 3
+sources/1 = SubResource("TileSetAtlasSource_r6ct7")

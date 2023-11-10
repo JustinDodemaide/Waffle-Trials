@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://652stl001k1d"]
+
+[ext_resource type="Script" path="res://WorldMap/WM_OptionsMenu/WM_OptionsButton/WM_OptionButton.gd" id="1_cdxpi"]
+
+[node name="WM_OptionButton" type="Button"]
+z_index = 2
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_cdxpi")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

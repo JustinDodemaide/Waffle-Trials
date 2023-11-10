@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciohvuosu7pjd"]
+
+[ext_resource type="Script" path="res://StoreComponent/Interactables/DroppedItem/DroppedItem.gd" id="1_kdrhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n0r3n"]
+size = Vector2(20, 66.5)
+
+[node name="DroppedItem" type="Node2D"]
+script = ExtResource("1_kdrhd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 31.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_n0r3n")

@@ -1,0 +1,22 @@
+extends Interactable
+
+# REMEMBER TO CONNECT TIMER (IF NEEDED)
+
+func a_name()->String:
+	return Sink
+
+func max_storage()->int:
+	return 1
+
+func effect()->String:
+	return ""
+
+func effect_strength()->int:
+	return 1
+
+func deposit_attributes()->PackedStringArray:
+	return ["washable"]
+
+func use(_interactor:Employee)->void:
+	pass
+

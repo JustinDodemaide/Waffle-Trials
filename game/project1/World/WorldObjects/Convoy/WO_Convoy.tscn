@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://qhutesiqco3y"]
+
+[ext_resource type="Script" path="res://World/WorldObjects/Convoy/WO_Convoy.gd" id="1_uie5r"]
+[ext_resource type="Texture2D" uid="uid://cmoprwq5vqw0m" path="res://WorldMap/WorldObjects/WO_Vehicle/truck.png" id="2_pwh1h"]
+
+[node name="WO_Convoy" type="Node"]
+script = ExtResource("1_uie5r")
+
+[node name="MoveTimer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_pwh1h")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

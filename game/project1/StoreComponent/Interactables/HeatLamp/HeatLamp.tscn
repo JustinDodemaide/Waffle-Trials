@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdqqw3xkw2pyd"]
+
+[ext_resource type="Script" path="res://StoreComponent/Interactables/HeatLamp/HeatLamp.gd" id="1_q08nt"]
+[ext_resource type="Texture2D" uid="uid://b7wri6261vej6" path="res://StoreComponent/Interactables/HeatLamp/heatlamp_off.png" id="2_nwewa"]
+[ext_resource type="Texture2D" uid="uid://bvmg3n7wrvdmr" path="res://StoreComponent/Interactables/HeatLamp/heatlmap_on.png" id="3_p3ga2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjkko"]
+atlas = ExtResource("2_nwewa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yyhy2"]
+atlas = ExtResource("3_p3ga2")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wjat"]
+atlas = ExtResource("3_p3ga2")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5rmw"]
+atlas = ExtResource("3_p3ga2")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow4n2"]
+atlas = ExtResource("3_p3ga2")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3nutu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjkko")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yyhy2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wjat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5rmw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow4n2")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuuej"]
+size = Vector2(40, 38)
+
+[node name="HeatLamp" type="Node2D"]
+script = ExtResource("1_q08nt")
+
+[node name="DisplayedItem" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(0, -7)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3nutu")
+animation = &"on"
+autoplay = "off"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1, -6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 45)
+shape = SubResource("RectangleShape2D_vuuej")

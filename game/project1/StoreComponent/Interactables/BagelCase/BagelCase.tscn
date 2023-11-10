@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://xorvgvhdwavb"]
+
+[ext_resource type="Texture2D" uid="uid://cyikftl8xiooj" path="res://StoreComponent/Interactables/BagelCase/BagelCase.png" id="1_0e3y7"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="2_g2thu"]
+
+[sub_resource type="GDScript" id="GDScript_5rgfj"]
+resource_name = "BagelCase"
+script/source = "extends Interactable
+
+func a_name()->String:
+	return \"Bagel Case\"
+
+func is_interaction_valid(interactor)->bool:
+	if interactor.carried_item != null:
+		return false
+	var option = get_option(interactor)
+	if option == \"use\":
+		return true
+	return false
+
+func interact(interactor)->void:
+	interactor.carry_item(Global.new_item(\"Bagel\"))
+	$Sound.play_sound(\"cabinet_open\")
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qylc"]
+atlas = ExtResource("1_0e3y7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8hsdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qylc")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85wl7"]
+size = Vector2(172, 65)
+
+[node name="BagelCase" type="Node2D"]
+script = SubResource("GDScript_5rgfj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_8hsdb")
+animation = &"off"
+autoplay = "off"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_85wl7")
+
+[node name="Sound" parent="." instance=ExtResource("2_g2thu")]

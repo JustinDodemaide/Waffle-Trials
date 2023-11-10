@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c553r8el4vg4d"]
+
+[ext_resource type="Texture2D" uid="uid://2esyb6vcm2xr" path="res://StoreComponent/Decor/Booth/boothseat.png" id="1_bbptl"]
+[ext_resource type="Script" path="res://StoreComponent/Decor/Booth/BoothSeat.gd" id="2_e7ove"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bv11f"]
+size = Vector2(144, 56)
+
+[node name="BoothSeat" type="Sprite2D"]
+texture = ExtResource("1_bbptl")
+script = ExtResource("2_e7ove")
+metadata/taken = false
+metadata/seat = Vector2(32, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_bv11f")
+metadata/Taken = false
+metadata/Seat = Vector2(32, 0)

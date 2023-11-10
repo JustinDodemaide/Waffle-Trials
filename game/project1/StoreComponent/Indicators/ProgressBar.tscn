@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwgui0owg5lyc"]
+
+[ext_resource type="Script" path="res://StoreComponent/Indicators/ProgressBar.gd" id="1_xi4vm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7fgfg"]
+bg_color = Color(0, 0, 0, 0.368627)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pkgqe"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="ProgressBar" type="ProgressBar"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+z_index = 8
+custom_minimum_size = Vector2(64, 24)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7fgfg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pkgqe")
+fill_mode = 1
+show_percentage = false
+script = ExtResource("1_xi4vm")

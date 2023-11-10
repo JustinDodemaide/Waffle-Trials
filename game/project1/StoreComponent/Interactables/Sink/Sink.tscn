@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=3 uid="uid://b57kbj2j546ie"]
+
+[ext_resource type="Texture2D" uid="uid://drgg1t7pupk8j" path="res://StoreComponent/Interactables/Sink/sink_on2.png" id="1_jxohx"]
+[ext_resource type="Texture2D" uid="uid://ckm73ukwyd0ud" path="res://StoreComponent/Interactables/Sink/sink_off.png" id="1_kuuot"]
+
+[sub_resource type="GDScript" id="GDScript_kto81"]
+resource_name = "Sink"
+script/source = "extends Interactable
+
+# REMEMBER TO CONNECT TIMER (IF NEEDED)
+
+func _ready():
+	Global.world.world_clock.timeout.connect(_on_timer_timeout)
+
+func a_name()->String:
+	return \"Sink\"
+
+func max_storage()->int:
+	return 3
+
+func effect()->String:
+	return \"wash\"
+
+func effect_strength()->int:
+	return 1
+
+func deposit_attributes()->PackedStringArray:
+	return [\"washable\"]
+
+func use(_interactor:Employee)->void:
+	pass
+
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib76a"]
+atlas = ExtResource("1_jxohx")
+region = Rect2(0, 0, 152, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txcl2"]
+atlas = ExtResource("1_jxohx")
+region = Rect2(152, 0, 152, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1ftf"]
+atlas = ExtResource("1_jxohx")
+region = Rect2(304, 0, 152, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edn6o"]
+atlas = ExtResource("1_jxohx")
+region = Rect2(456, 0, 152, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3qgg"]
+atlas = ExtResource("1_jxohx")
+region = Rect2(608, 0, 152, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p1ebb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kuuot")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib76a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txcl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1ftf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edn6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3qgg")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_medq4"]
+size = Vector2(76, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_772lo"]
+size = Vector2(152, 43)
+
+[node name="Sink" type="Node2D"]
+script = SubResource("GDScript_kto81")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_p1ebb")
+animation = &"on"
+autoplay = "off"
+
+[node name="DisplayedItem" type="Sprite2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_medq4")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 53.5)
+shape = SubResource("RectangleShape2D_772lo")

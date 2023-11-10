@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://b5qgv38dl26h5"]
+
+[ext_resource type="Texture2D" uid="uid://deblw17wtt11c" path="res://StoreComponent/Interactables/CuttingBoard/cuttingboard.png" id="1_c1k1m"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="2_1wgpe"]
+
+[sub_resource type="GDScript" id="GDScript_dr5x8"]
+resource_name = "CuttingBoard"
+script/source = "extends Interactable
+
+# REMEMBER TO CONNECT TIMER (IF NEEDED)
+
+func a_name()->String:
+	return \"Cutting Board\"
+
+func max_storage()->int:
+	return 1
+
+func effect()->String:
+	return \"cut\"
+
+func effect_strength()->int:
+	return 1
+
+func deposit_attributes()->PackedStringArray:
+	return [\"cuttable\"]
+
+func is_interaction_valid(interactor)->bool:
+	var option = get_option(interactor)
+	if option != \"use\":
+		return false
+	if interactor.carried_item != null:
+		if interactor.carried_item.attributes().has(\"cuttable\"):
+			return true
+	return false
+#	if is_empty():
+#		return false
+#	if !storage.front().attributes().has(\"cuttable\"):
+#		return false
+#	return true
+	
+func use(_interactor)->void:
+	var wait_time:int = round((_interactor.carried_item.max_applications(effect()) / effect_strength()))
+	if _interactor is Player:
+		_interactor.immobilize(wait_time)
+	var timer = Timer.new()
+	add_child(timer)
+	$Sound.play_sound(\"chop\")
+	for i in wait_time:
+		timer.start(1)
+		await timer.timeout
+		for j in effect_strength():
+			_interactor.carried_item.apply_effect(effect())
+	_interactor.get_node(\"CarriedItem\").texture = load(_interactor.carried_item.sprite_path()) # hack
+	update_display()
+	timer.queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kipl2"]
+atlas = ExtResource("1_c1k1m")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0nt1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kipl2")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7c7t"]
+size = Vector2(61, 57)
+
+[node name="CuttingBoard" type="Node2D"]
+script = SubResource("GDScript_dr5x8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_0nt1q")
+animation = &"off"
+autoplay = "off"
+
+[node name="DisplayedItem" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(0, -3)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1.5, 45.5)
+shape = SubResource("RectangleShape2D_i7c7t")
+
+[node name="Sound" parent="." instance=ExtResource("2_1wgpe")]

@@ -1,0 +1,210 @@
+[gd_scene load_steps=27 format=3 uid="uid://cdxlp52k28s4k"]
+
+[ext_resource type="Script" path="res://StoreComponent/Employee/Employee.gd" id="1_ornpu"]
+[ext_resource type="Script" path="res://StoreComponent/Employee/StateMachine.gd" id="2_q5bqr"]
+[ext_resource type="Script" path="res://StoreComponent/Employee/Wandering.gd" id="3_jnt3t"]
+[ext_resource type="Script" path="res://StoreComponent/Employee/Moving.gd" id="4_qp1q2"]
+[ext_resource type="Script" path="res://StoreComponent/Employee/Waiting.gd" id="5_bw0p5"]
+[ext_resource type="Texture2D" uid="uid://cjro6e3qa00c6" path="res://Level/Player/player_idle.png" id="6_a17iy"]
+[ext_resource type="Texture2D" uid="uid://b3map7lsenwq3" path="res://Level/Player/player_run.png" id="7_502ca"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqosl"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_647fd"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50pac"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd6vx"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2usj0"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtdpc"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k68d8"]
+atlas = ExtResource("6_a17iy")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5rwp"]
+atlas = ExtResource("7_502ca")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u20bp"]
+atlas = ExtResource("7_502ca")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ky3ib"]
+atlas = ExtResource("7_502ca")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aibhl"]
+atlas = ExtResource("7_502ca")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5luy"]
+atlas = ExtResource("7_502ca")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu80t"]
+atlas = ExtResource("7_502ca")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onxpg"]
+atlas = ExtResource("7_502ca")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unaiq"]
+atlas = ExtResource("7_502ca")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3a82"]
+atlas = ExtResource("7_502ca")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0pd3"]
+atlas = ExtResource("7_502ca")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcm4p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqosl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_647fd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50pac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd6vx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2usj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtdpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k68d8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5rwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u20bp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ky3ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aibhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5luy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iu80t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onxpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_unaiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3a82")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0pd3")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hltpw"]
+size = Vector2(62, 65)
+
+[node name="Employee" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_ornpu")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_q5bqr")
+
+[node name="Wandering" type="Node" parent="StateMachine"]
+script = ExtResource("3_jnt3t")
+
+[node name="Moving" type="Node" parent="StateMachine"]
+script = ExtResource("4_qp1q2")
+
+[node name="Waiting" type="Node" parent="StateMachine"]
+script = ExtResource("5_bw0p5")
+
+[node name="Timer" type="Timer" parent="StateMachine"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 4
+sprite_frames = SubResource("SpriteFrames_fcm4p")
+animation = &"move"
+autoplay = "idle"
+
+[node name="CarriedItem" type="Sprite2D" parent="."]
+z_index = 5
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 50.0
+avoidance_enabled = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TasksLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_hltpw")
+
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]

@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpa8bxtnaey1t"]
+
+[ext_resource type="Texture2D" uid="uid://bi4h5c0vd5ssq" path="res://StoreComponent/Interactables/CoffeeMaker/coffeemaker_off.png" id="1_tjcha"]
+[ext_resource type="Texture2D" uid="uid://bgvmjv22pdc3c" path="res://StoreComponent/Interactables/CoffeeMaker/coffeemaker_on.png" id="2_jw3h8"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="3_0enmn"]
+
+[sub_resource type="GDScript" id="GDScript_la2fb"]
+resource_name = "CoffeeMaker"
+script/source = "extends Interactable
+
+var available:bool = true
+
+func a_name()->String:
+	return \"Coffee Maker\"
+
+func is_interaction_valid(interactor)->bool:
+	var option = get_option(interactor)
+	if option == \"use\":
+		if available:
+			return true
+	return false
+
+func interact(interactor)->void:
+	interactor.carry_item(Global.new_item(\"Coffee\"))
+	available = false
+	$AnimatedSprite2D.play(\"off\")
+	$Timer.start(7)
+
+func _on_timer_timeout():
+	available = true
+	$AnimatedSprite2D.play(\"on\")
+	$Sound.play_sound(\"coffee_ready\")
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25ph7"]
+atlas = ExtResource("1_tjcha")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pgid"]
+atlas = ExtResource("2_jw3h8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7nw54"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25ph7")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pgid")
+}],
+"loop": false,
+"name": &"on",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eyjfw"]
+size = Vector2(154, 56)
+
+[node name="CoffeeMaker" type="Node2D"]
+script = SubResource("GDScript_la2fb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_7nw54")
+animation = &"off"
+autoplay = "on"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_eyjfw")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Sound" parent="." instance=ExtResource("3_0enmn")]
+volume_db = 20.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

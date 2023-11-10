@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c66jv1i0k5rkt"]
+
+[ext_resource type="Texture2D" uid="uid://diqp5hsh1r0v3" path="res://StoreComponent/Decor/Booth/boothtable.png" id="1_vokfg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gnfpx"]
+size = Vector2(144, 48)
+
+[node name="BoothTable" type="Sprite2D"]
+texture = ExtResource("1_vokfg")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_gnfpx")

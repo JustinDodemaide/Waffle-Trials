@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://3iy7hter4kuk"]
+
+[ext_resource type="Script" path="res://StoreComponent/OptionsMenu/Store_OptionsMenu.gd" id="1_uflko"]
+[ext_resource type="FontFile" uid="uid://8g4u74xs6nhd" path="res://battlenet.ttf" id="2_fn8e2"]
+[ext_resource type="Script" path="res://StoreComponent/OptionsMenu/Button.gd" id="3_gbi6f"]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+script = ExtResource("1_uflko")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fn8e2")
+theme_override_font_sizes/font_size = 30
+script = ExtResource("3_gbi6f")
+
+[connection signal="option_chosen" from="HBoxContainer/Button" to="." method="_on_button_option_chosen"]
+[connection signal="pressed" from="HBoxContainer/Button" to="HBoxContainer/Button" method="_on_pressed"]

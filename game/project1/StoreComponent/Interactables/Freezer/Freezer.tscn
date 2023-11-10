@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ixm7vfgad0hb"]
+
+[ext_resource type="Script" path="res://StoreComponent/Interactables/Freezer/Freezer.gd" id="1_71trb"]
+[ext_resource type="Texture2D" uid="uid://bk6tjpfj1qtmb" path="res://StoreComponent/Interactables/Freezer/freezer1.png" id="2_y8s6t"]
+
+[node name="Freezer" type="Node2D"]
+script = ExtResource("1_71trb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_y8s6t")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1.0
+offset_top = -55.0
+offset_right = 41.0
+offset_bottom = -32.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

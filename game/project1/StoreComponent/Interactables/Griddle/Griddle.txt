@@ -1,0 +1,20 @@
+extends Interactable
+
+# REMEMBER TO CONNECT TIMER (IF NEEDED)
+REMEMBER TO CHECK FOR SPELLING ERRORS IN THE ATTRIBUTES
+
+func a_name()->String:
+	return "Griddle"
+
+func max_storage()->int:
+	return 1
+
+func effect()->String:
+	return "grill"
+
+func effect_strength()->int:
+	return 1
+
+func deposit_attributes()->PackedStringArray:
+	return ["grillable"]
+

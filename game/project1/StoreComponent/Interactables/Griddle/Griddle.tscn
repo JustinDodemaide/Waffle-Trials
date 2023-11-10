@@ -1,0 +1,140 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4i1ni3s7nlrn"]
+
+[ext_resource type="Texture2D" uid="uid://b3galax0oyis7" path="res://StoreComponent/Interactables/Griddle/griddle_left.png" id="1_ko78t"]
+[ext_resource type="Texture2D" uid="uid://cgotrenqcheea" path="res://StoreComponent/Interactables/Griddle/griddle_left_on1.png" id="2_ewnxh"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="3_1r1j4"]
+
+[sub_resource type="GDScript" id="GDScript_4orph"]
+resource_name = "Griddle"
+script/source = "extends Interactable
+
+@export var right:bool = false
+
+func _ready():
+	if right:
+		$AnimatedSprite2D.flip_h = true
+	Global.world.world_clock.timeout.connect(_on_timer_timeout)
+		
+func a_name()->String:
+	return \"Griddle\"
+
+func max_storage()->int:
+	return 1
+
+func effect()->String:
+	return \"grill\"
+
+func effect_strength()->int:
+	return 1
+
+func deposit_attributes()->PackedStringArray:
+	return [\"grillable\"]
+
+func interact(interactor)->void:
+	var option:String = \"\"
+	if interactor is Player:
+		option = interactor.option
+	else:
+		option = interactor.current_task.option
+	if option == \"deposit\":
+		var item:Item = interactor.carried_item
+		interactor.remove_item()
+		add_item(item)
+		$Sound.play_sound(\"sizzle\")
+	if option == \"collect\":
+		var item:Item
+		if interactor is Employee:
+			item = get_item(interactor.current_task.required_item)
+		else:
+			item = get_back_item()
+		interactor.carry_item(item)
+	if option == \"use\":
+		use(interactor)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4nd0c"]
+atlas = ExtResource("1_ko78t")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsf7o"]
+atlas = ExtResource("2_ewnxh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fx3f6"]
+atlas = ExtResource("2_ewnxh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3knfm"]
+atlas = ExtResource("2_ewnxh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ogvp"]
+atlas = ExtResource("2_ewnxh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b0mg"]
+atlas = ExtResource("2_ewnxh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_abjyu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4nd0c")
+}],
+"loop": false,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsf7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fx3f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3knfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ogvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8b0mg")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uvt3b"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1a53"]
+size = Vector2(65, 49)
+
+[node name="Griddle" type="Node2D"]
+script = SubResource("GDScript_4orph")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_abjyu")
+animation = &"off"
+autoplay = "off"
+
+[node name="DisplayedItem" type="Sprite2D" parent="."]
+z_index = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_uvt3b")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 56.5)
+shape = SubResource("RectangleShape2D_c1a53")
+
+[node name="Sound" parent="." instance=ExtResource("3_1r1j4")]

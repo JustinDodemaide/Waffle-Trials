@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbjbf0m3q2fqo"]
+
+[ext_resource type="FontFile" uid="uid://8g4u74xs6nhd" path="res://battlenet.ttf" id="2_riy3s"]
+[ext_resource type="Script" path="res://Level/Player/Request/RequestButton.gd" id="3_jp2la"]
+
+[sub_resource type="GDScript" id="GDScript_50imf"]
+script/source = "extends CanvasLayer
+
+signal option_chosen(option:String)
+
+func init():
+	var options = [\"Waffle\",\"Hashbrowns\",\"ScrambledEggs\",\"Toast\"]
+	for i in options:
+		var new_button = $HBoxContainer/Button.duplicate()
+		var item = Item.new()
+		item.init(i)
+		new_button.icon = load(item.sprite_path())
+		new_button.visible = true
+		new_button.item_name = i
+		new_button.parent = self
+		new_button.tooltip_text = i
+		$HBoxContainer.add_child(new_button)
+"
+
+[node name="RequestMenu" type="CanvasLayer"]
+script = SubResource("GDScript_50imf")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -54.0
+offset_right = 96.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_riy3s")
+theme_override_font_sizes/font_size = 32
+text = "Tell Chip to make:"
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("3_jp2la")
+metadata/item = ""
+
+[connection signal="pressed" from="HBoxContainer/Button" to="HBoxContainer/Button" method="_on_pressed"]

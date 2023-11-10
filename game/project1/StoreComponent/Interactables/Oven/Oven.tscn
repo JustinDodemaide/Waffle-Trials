@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn4ijkxpxjgkg"]
+
+[ext_resource type="Script" path="res://StoreComponent/Interactables/Oven/Oven.gd" id="1_o0tnt"]
+[ext_resource type="Texture2D" uid="uid://bt3lxyibvwki0" path="res://StoreComponent/Interactables/Oven/oven1.png" id="2_naghe"]
+
+[node name="Oven" type="Node2D"]
+script = ExtResource("1_o0tnt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_naghe")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

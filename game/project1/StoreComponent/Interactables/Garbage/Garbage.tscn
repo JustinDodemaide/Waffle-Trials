@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://imidu88yhsdh"]
+
+[ext_resource type="Texture2D" uid="uid://bvmtcrb2nx6w2" path="res://StoreComponent/Interactables/Garbage/garbagecan.png" id="1_1liue"]
+
+[sub_resource type="GDScript" id="GDScript_rmk7q"]
+resource_name = "Garbage"
+script/source = "extends Interactable
+
+func a_name()->String:
+	return \"Garbage\"
+
+func max_storage()->int:
+	return 0
+
+func effect()->String:
+	return \"dispose\"
+
+func effect_strength()->int:
+	return 0
+
+func deposit_attributes()->PackedStringArray:
+	return [\"disposeable\"]
+
+func is_interaction_valid(interactor)->bool:
+	var option:String = \"\"
+	if interactor is Player:
+		option = interactor.option
+	else:
+		option = interactor.current_task.option
+	if option == \"deposit\":
+		if interactor.is_empty_handed():
+			return false
+		#if not Global.has_intersection(interactor.carried_item.attributes(), deposit_attributes()):
+		#	return false
+		return true
+	return false
+
+func interact(interactor)->void:
+	var option:String = \"\"
+	if interactor is Player:
+		option = interactor.option
+	else:
+		option = interactor.current_task.option
+	if option == \"deposit\":
+		var blood_moon:bool = false
+		if interactor.carried_item.a_name() == \"Anti-Skeleton Pan\":
+			blood_moon = true
+		interactor.remove_item()
+		
+		
+		if blood_moon:
+			for i in range(12):
+				Global.current_store.make_skeleton()
+				await Global.world.world_clock.timeout
+			var tween = create_tween()
+			tween.tween_interval(14)
+			await tween.finished
+			Global.current_store.make_dropped_item(\"Anti-SkeletonPan\",Vector2(923,224))
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwk7c"]
+atlas = ExtResource("1_1liue")
+region = Rect2(0, 0, 64, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gs33"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwk7c")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3u7xs"]
+size = Vector2(107, 99)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m85os"]
+size = Vector2(48, 76)
+
+[node name="Garbage" type="Node2D"]
+script = SubResource("GDScript_rmk7q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_5gs33")
+animation = &"off"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 50)
+shape = SubResource("RectangleShape2D_3u7xs")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_m85os")

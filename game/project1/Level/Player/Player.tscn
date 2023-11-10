@@ -1,0 +1,214 @@
+[gd_scene load_steps=27 format=3 uid="uid://dihhyv6pskmb2"]
+
+[ext_resource type="Texture2D" uid="uid://cjro6e3qa00c6" path="res://Level/Player/player_idle.png" id="1_7jx15"]
+[ext_resource type="Script" path="res://Level/Player/Player.gd" id="1_ipwfe"]
+[ext_resource type="Texture2D" uid="uid://b3map7lsenwq3" path="res://Level/Player/player_run.png" id="2_h7cnu"]
+[ext_resource type="FontFile" uid="uid://8g4u74xs6nhd" path="res://battlenet.ttf" id="3_w6oyp"]
+[ext_resource type="PackedScene" uid="uid://dpxxr0w2q7uqq" path="res://sounds/Sound.tscn" id="5_3iedc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3pxs"]
+size = Vector2(28, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4h0i"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqg3d"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mwfi"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1vmk"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cadmv"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x883n"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0l0c"]
+atlas = ExtResource("1_7jx15")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqnt4"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gn1x0"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_km4i5"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pnje3"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_100oq"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7oehg"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wt2rh"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3hor"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fggxr"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18l1w"]
+atlas = ExtResource("2_h7cnu")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ucem3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4h0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqg3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mwfi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1vmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cadmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x883n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0l0c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqnt4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gn1x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km4i5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pnje3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_100oq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7oehg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wt2rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3hor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fggxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18l1w")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fubru"]
+size = Vector2(32, 8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mb6sp"]
+polygon = PackedVector2Array(-19, 32, -11, 4, -14, -15, -8, -21, -8, -32, 4.78999, -32, 5, -21, 10, -15, 9, 5, 13, 32, 4, 32, 4, 24, -12, 24, -11.3973, 32)
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+script = ExtResource("1_ipwfe")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 28)
+shape = SubResource("RectangleShape2D_e3pxs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)
+position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
+sprite_frames = SubResource("SpriteFrames_ucem3")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Detection" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-4, 28)
+shape = SubResource("RectangleShape2D_fubru")
+
+[node name="Prompts" type="VBoxContainer" parent="."]
+z_index = 7
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="CurrentInteractable" type="Label" parent="Prompts"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_w6oyp")
+theme_override_font_sizes/font_size = 32
+
+[node name="DropItem" type="Label" parent="Prompts"]
+z_index = 2
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_w6oyp")
+theme_override_font_sizes/font_size = 32
+
+[node name="CurrentEmployee" type="Label" parent="Prompts"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_w6oyp")
+theme_override_font_sizes/font_size = 32
+
+[node name="CarriedItem" type="Sprite2D" parent="."]
+z_index = 7
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_mb6sp")
+
+[node name="Sound" parent="." instance=ExtResource("5_3iedc")]
+
+[node name="Footsteps" parent="." instance=ExtResource("5_3iedc")]
+volume_db = -20.0
