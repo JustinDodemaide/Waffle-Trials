@@ -1,17 +1,6 @@
 extends TileMap
 class_name Store
 
-# tile checklist:
-# sidewalk
-# special wall
-# counter right edge
-# decor (street stuff, neighboring buildings
-
-
-# bob limousine
-
-
-
 var scene_handler = null
 
 var tickets:Dictionary = {}
